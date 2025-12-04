@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fake News Detector</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f3f3f3;
+            padding: 40px;
+        }
+        h1 {
+            color: #222;
+            text-align: center;
+        }
+        .container {
+            width: 50%;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+        }
+        textarea {
+            width: 100%;
+            height: 140px;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #bbb;
+            font-size: 16px;
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px 25px;
+            border: none;
+            background: #007bff;
+            color: white;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .real {
+            background: #d4edda;
+            color: #155724;
+        }
+        .fake {
+            background: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Fake News Detector</h1>
+
+<div class="container">
+    <form method="POST" action="/predict">
+        <textarea name="news" placeholder="Enter news text here...">{{ input_text }}</textarea>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction %}
+        <div class="result {% if 'REAL' in prediction %}real{% else %}fake{% endif %}">
+            {{ prediction }}
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
